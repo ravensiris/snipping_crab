@@ -1,0 +1,13 @@
+[package]
+name = "snippy_crab"
+version = "0.1.0"
+authors = []
+edition = "2018"
+
+[lib]
+name = "snippy_crab"
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+rustler = "0.25.0"
