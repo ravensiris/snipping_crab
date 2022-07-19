@@ -1,0 +1,33 @@
+<h1>Show Image</h1>
+
+<ul>
+
+  <li>
+    <strong>File:</strong>
+    <%= @image.file %>
+  </li>
+
+  <li>
+    <strong>X:</strong>
+    <%= @image.x %>
+  </li>
+
+  <li>
+    <strong>Y:</strong>
+    <%= @image.y %>
+  </li>
+
+  <li>
+    <strong>Width:</strong>
+    <%= @image.width %>
+  </li>
+
+  <li>
+    <strong>Height:</strong>
+    <%= @image.height %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.image_path(@conn, :edit, @image) %></span> |
+<span><%= link "Back", to: Routes.image_path(@conn, :index) %></span>
