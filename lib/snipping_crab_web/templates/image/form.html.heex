@@ -1,31 +1,28 @@
-<.form let={f} for={@changeset} action={@action}>
+<img id="imagePreview" src="#" hidden>
+
+<.form let={f} for={@changeset} action={@action} multipart={true} id="image" >
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
 
-  <%= label f, :file %>
-  <%= text_input f, :file %>
+  <%= file_input f, :file %>
   <%= error_tag f, :file %>
 
-  <%= label f, :x %>
-  <%= number_input f, :x %>
+  <%= hidden_input f, :x %>
   <%= error_tag f, :x %>
 
-  <%= label f, :y %>
-  <%= number_input f, :y %>
+  <%= hidden_input f, :y %>
   <%= error_tag f, :y %>
 
-  <%= label f, :width %>
-  <%= number_input f, :width %>
+  <%= hidden_input f, :width %>
   <%= error_tag f, :width %>
 
-  <%= label f, :height %>
-  <%= number_input f, :height %>
+  <%= hidden_input f, :height %>
   <%= error_tag f, :height %>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Upload" %>
   </div>
 </.form>
