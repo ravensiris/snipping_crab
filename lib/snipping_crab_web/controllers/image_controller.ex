@@ -17,11 +17,8 @@ defmodule SnippingCrabWeb.ImageController do
       %{x: x, y: y, width: width, height: height} = changeset.changes
 
       image_buffer = File.read!(path)
-
-      image_b64 =
-        image_buffer
-        |> SnippyCrab.crop_and_grayscale(x, y, width, height)
-        |> Base.encode64()
+      {:ok, image} = SnippyCrab.crop_and_grayscale(image_buffer, x, y, width, height)
+      image_b64 = Base.encode64(image)
 
       render(conn, "show.html", image_src: "data:image/png;base64,#{image_b64}")
     else
