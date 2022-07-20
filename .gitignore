@@ -32,3 +32,4 @@ snipping_crab-*.tar
 npm-debug.log
 /assets/node_modules/
 
+*.so
