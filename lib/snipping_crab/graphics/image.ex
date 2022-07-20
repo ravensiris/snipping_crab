@@ -3,7 +3,7 @@ defmodule SnippingCrab.Graphics.Image do
   import Ecto.Changeset
 
   schema "images" do
-    field :file, :string
+    field :file, :map
     field :height, :integer
     field :width, :integer
     field :x, :integer
