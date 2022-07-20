@@ -1,3 +1,41 @@
+enum Error {
+    ImageError(image::ImageError),
+    IoError(std::io::Error),
+}
+
+impl From<image::ImageError> for Error {
+    fn from(error: image::ImageError) -> Self {
+        Error::ImageError(error)
+    }
+}
+
+impl From<std::io::Error> for Error {
+    fn from(error: std::io::Error) -> Self {
+        Error::IoError(error)
+    }
+}
+
+impl rustler::Encoder for Error {
+    fn encode<'a>(&self, env: rustler::env::Env<'a>) -> rustler::Term<'a> {
+        let msg = match &self {
+            Error::ImageError(error) => match error {
+                image::ImageError::Decoding(_) => "Decoding error",
+                image::ImageError::Encoding(_) => "Encoding error",
+                image::ImageError::Parameter(_) => "Parameter error",
+                image::ImageError::Limits(_) => "Limits error",
+                image::ImageError::Unsupported(_) => "Unsupported format error",
+                image::ImageError::IoError(_) => "Image IO error",
+            },
+            Error::IoError(_) => "Error reading the buffer",
+        };
+
+        let mut msg_binary = rustler::NewBinary::new(env, msg.len());
+        msg_binary.as_mut_slice().clone_from_slice(msg.as_bytes());
+
+        msg_binary.into()
+    }
+}
+
 #[rustler::nif]
 fn crop_and_grayscale<'a>(
     env: rustler::env::Env<'a>,
