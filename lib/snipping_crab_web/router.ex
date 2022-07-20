@@ -17,7 +17,7 @@ defmodule SnippingCrabWeb.Router do
   scope "/", SnippingCrabWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    resources "/", ImageController
   end
 
   # Other scopes may use custom stacks.
